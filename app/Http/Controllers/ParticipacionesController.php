@@ -8,15 +8,17 @@ use Illuminate\Support\Facades\Validator;
 
 class ParticipacionesController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $participaciones = participaciones::all();
         return response()->json($participaciones, 200);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validate = Validator::make($request->all(), [
             'id_asociado' => 'required|exists:asociados,id',
-            'id_actividad' => 'required|exists:actividad,id'
+            'id_actividad' => 'required|exists:actividades,id',
         ]);
 
         if ($validate->fails()) {
@@ -27,7 +29,8 @@ class ParticipacionesController extends Controller
         return response()->json($participacion, 201);
     }
 
-    public function show(string $id){
+    public function show(string $id)
+    {
         $participacion = participaciones::find($id);
         if (!$participacion) {
             return response()->json(['message' => 'Participacion not found'], 404);
@@ -35,7 +38,8 @@ class ParticipacionesController extends Controller
         return response()->json($participacion, 200);
     }
 
-    public function update(Request $request,string $id){
+    public function update(Request $request, string $id)
+    {
         $participacion = participaciones::find($id);
         if (!$participacion) {
             return response()->json(['message' => 'Participacion not found'], 404);
@@ -43,8 +47,9 @@ class ParticipacionesController extends Controller
 
         $validate = Validator::make($request->all(), [
             'id_asociado' => 'sometimes|required|exists:asociados,id',
-            'id_actividad' => 'sometimes|required|exists:actividad,id'
+            'id_actividad' => 'sometimes|required|exists:actividades,id',
         ]);
+
 
         if ($validate->fails()) {
             return response()->json($validate->errors(), 422);
@@ -54,7 +59,8 @@ class ParticipacionesController extends Controller
         return response()->json($participacion, 200);
     }
 
-    public function destroy(string $id){
+    public function destroy(string $id)
+    {
         $participacion = participaciones::find($id);
         if (!$participacion) {
             return response()->json(['message' => 'Participacion not found'], 404);

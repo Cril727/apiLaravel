@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('apellido');
             $table->string('email')->unique();
             $table->string('telefono')->nullable();
-            $table->date('fecha_nacimiento')->nullable(false)->change();
-            $table->enum('genero', ['M','F'])->nullable(false)->change();
+            $table->date('fecha_nacimiento');
+            $table->enum('genero', ['M','F']);
             $table->timestamps();
         });
     }

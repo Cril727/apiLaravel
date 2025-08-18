@@ -16,7 +16,7 @@ class PrestamosController extends Controller
     public function store(Request $request){
         $validate = Validator::make($request->all(), [
             'valor' => 'required|numeric',
-            'tasaInteres' => 'required|date',
+            'tasaInteres' => 'required|numeric',
             'numeroCuotas' => 'required|integer',
             'fechaPrestamo' => 'required|date',
             'id_asociado' => 'required|exists:asociados,id'
