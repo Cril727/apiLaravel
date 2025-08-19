@@ -20,18 +20,30 @@ class AsociadoController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         // Validate the request
+        // $validate = Validator::make($request->all(), [
+        //     'documento' => 'required|string|unique:asociados,documento',
+        //     'nombre' => 'required|string|max:255',
+        //     'apellido' => 'required|string|max:255',
+        //     'email' => 'required|email|unique:asociados,email',
+        //     'telefono' => 'nullable|string|max:15',
+        //     'fecha_nacimiento' => 'required|date',
+        //     'genero' => 'required|in:M,F'
+        // ]);
+
+
         $validate = Validator::make($request->all(), [
             'documento' => 'required|string|unique:asociados,documento',
             'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
             'email' => 'required|email|unique:asociados,email',
             'telefono' => 'nullable|string|max:15',
             'fecha_nacimiento' => 'required|date',
-            'genero' => 'required|in:M,F'
+            'genero' => 'required|in:M,F,O'
         ]);
+
 
         // Validate the request
         if ($validate->fails()) {
@@ -41,9 +53,8 @@ class AsociadoController extends Controller
         // Create the new Asociado
         $asociado = Asociado::create($request->all());
         return response()->json($asociado, 201);
-        
     }
-    
+
     /**
      * Display the specified resource.
      */
@@ -59,10 +70,11 @@ class AsociadoController extends Controller
     /**
      * Update
      */
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
         $asociado = Asociado::find($id);
 
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             'documento' => 'string|max:255',
             'nombre' => 'string',
             'apellido' => 'string',
@@ -72,7 +84,7 @@ class AsociadoController extends Controller
             'genero' => 'in:M,F'
         ]);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             return response()->json($validate->errors(), 422);
         }
 
@@ -81,16 +93,14 @@ class AsociadoController extends Controller
     }
 
 
-    public function destroy(string $id){
+    public function destroy(string $id)
+    {
         $asociado = Asociado::find($id);
-        if(!$asociado){
+        if (!$asociado) {
             return response()->json(['message' => 'Asociado not found'], 404);
         }
 
         $asociado->delete();
         return response()->json(['message' => 'Asociado deleted successfully'], 200);
     }
-
-
 }
-

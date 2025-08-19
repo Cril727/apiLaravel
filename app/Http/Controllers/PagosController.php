@@ -13,13 +13,22 @@ class PagosController extends Controller
         $pagos = Pagos::all();
         return response()->json($pagos, 200);
     }
-    
-    public function store (Request $request){
+
+    public function store(Request $request)
+    {
+        // $validate = Validator::make($request->all(), [
+        //     'valorPago' => 'required|numeric',
+        //     'fechaPago' => 'required|date',
+        //     'id_prestamo' => 'required|exists:prestamos,id'
+        // ]);
+
+        
         $validate = Validator::make($request->all(), [
-            'valorPago' => 'required|numeric',
-            'fechaPago' => 'required|date',
+            'valor_pago' => 'required|numeric',
+            'pagado_el'  => 'required|date',
             'id_prestamo' => 'required|exists:prestamos,id'
         ]);
+
 
         if ($validate->fails()) {
             return response()->json($validate->errors(), 422);
@@ -38,7 +47,7 @@ class PagosController extends Controller
         return response()->json($pago, 200);
     }
 
-    public function update(Request $request,string $id)
+    public function update(Request $request, string $id)
     {
         $pago = Pagos::find($id);
         if (!$pago) {
