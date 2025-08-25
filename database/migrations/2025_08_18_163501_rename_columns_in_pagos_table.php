@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::table('pagos', function (Blueprint $table) {
             //
-            $table->renameColumn('valorPago', 'valor_pago');
-            $table->renameColumn('fechaPago', 'pagado_el');
+            //$table->renameColumn('valorPago', 'valor_pago');
+            //$table->renameColumn('fechaPago', 'pagado_el');
         });
     }
 
@@ -25,8 +25,8 @@ return new class extends Migration
     {
         Schema::table('pagos', function (Blueprint $table) {
             //
-            $table->renameColumn('valor_pago', 'valorPago');
-            $table->renameColumn('pagado_el', 'fechaPago');
+            //$table->renameColumn('valor_pago', 'valorPago');
+            //$table->renameColumn('pagado_el', 'fechaPago');
         });
     }
 };

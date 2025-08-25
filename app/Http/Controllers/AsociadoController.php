@@ -103,4 +103,10 @@ class AsociadoController extends Controller
         $asociado->delete();
         return response()->json(['message' => 'Asociado deleted successfully'], 200);
     }
+
+
+    public function listarMujeres(){
+        $mujeres = Asociado::where('genero','F')->get();
+        return response()->json($mujeres);
+    }
 }

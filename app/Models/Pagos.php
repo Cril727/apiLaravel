@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pagos extends Model
 {
-    // protected $fillable = [
-    //     'valorPago',
-    //     'fechaPago',
-    //     'id_prestamo'
-    // ];
-
     protected $fillable = [
-        'valor_pago',
-        'pagado_el',
+        'valorPago',
+        'fechaPago',
         'id_prestamo'
     ];
+
+    // protected $fillable = [
+    //     'valor_pago',
+    //     'pagado_el',
+    //     'id_prestamo'
+    // ];
 
 
     public function prestamo()

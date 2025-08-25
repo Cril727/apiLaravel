@@ -71,4 +71,34 @@ class PrestamosController extends Controller
         $prestamo->delete();
         return response()->json(['message' => 'Prestamo deleted successfully'], 200);
     }
+
+    //total prestamo
+    public function totalPrestamo()
+    {
+        $totalPrestamos = Prestamos::count('valor');
+        return response()->json(['totalPrestamos' => $totalPrestamos]);
+    }
+
+    public function totalPrestamosByAsociado($id)
+    {
+        $totalPrestamos = Prestamos::where('id_asociado,nombre,apellido')
+        ->select('id','id_asociado',"fechaPrestamo","valor")
+        ->whereBetween('fechaPrestamo', ['2024-01-01', '2025-12-31'])
+        ->get()
+        ->map(function ($prestamo) {
+            return [
+                'fechaPrestamo' => $prestamo->fechaPrestamo,
+                'valor_prestamo' => $prestamo->valor,
+                'nombre_asociado' => $prestamo->asociado->nombre,
+                'apellido_asociado' => $prestamo->asociado->apellido
+            ];
+        });
+
+        return response()->json([
+            'success' => true,
+            'data' => $totalPrestamos
+        ]);
+    }
+
+
 }

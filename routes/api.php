@@ -19,8 +19,8 @@ Route::post('crearAsociado',[AsociadoController::class, 'store']);
 Route::get('asociado/{id}',[AsociadoController::class, 'show']);
 Route::put('actualizarAsociado/{id}',[AsociadoController::class, 'update']);
 Route::delete('eliminarAsociado/{id}',[AsociadoController::class, 'destroy']);
-
-
+//lisatr muejres
+Route::get('listarMujeres', [AsociadoController::class, 'listarMujeres']);
 //Routes Prestamos
 Route::get('listarPrestamos',[PrestamosController::class, 'index']);
 Route::post('crearPrestamo',[PrestamosController::class, 'store']);

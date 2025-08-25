@@ -14,13 +14,13 @@ return new class extends Migration
     {
         Schema::table('asociados', function (Blueprint $table) {
             //
-            DB::table('asociados')
-            ->whereNotIn('genero', ['M','F'])
-            ->update(['genero' => 'O']);
+            // DB::table('asociados')
+            //     ->whereNotIn('genero', ['M', 'F'])
+            //     ->update(['genero' => 'O']);
 
-            Schema::table('asociados', function (Blueprint $table) {
-            $table->enum('genero', ['M','F','O'])->default('O')->change();
-        });
+            // Schema::table('asociados', function (Blueprint $table) {
+            //     $table->enum('genero', ['M', 'F', 'O'])->default('O')->change();
+            // });
         });
     }
 
@@ -29,12 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+
+        DB::table('asociados')->where('genero', 'O')->update(['genero' => 'M']);
         Schema::table('asociados', function (Blueprint $table) {
-            //
-            DB::table('asociados')->where('genero', 'O')->update(['genero' => 'M']);
-            Schema::table('asociados', function (Blueprint $table) {
-            $table->enum('genero', ['M','F'])->default('M')->change();
-        });
+            // $table->enum('genero', ['M', 'F'])->default('M')->change();
         });
     }
 };

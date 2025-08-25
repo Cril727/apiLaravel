@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('asociados', function (Blueprint $table) {
             //
-            $table->dropColumn('apellido');
+            //$table->dropColumn('apellido');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('asociados', function (Blueprint $table) {
             //
-            $table->string('apellido', 255)->after('nombre');
+            //$table->string('apellido', 255)->after('nombre');
         });
     }
 };

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('actividades', function (Blueprint $table) {
             //
-            $table->time('hora')->nullable()->after('fecha');
+           // $table->time('hora')->nullable()->after('fecha');
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('actividades', function (Blueprint $table) {
             //
-            $table->dropColumn('hora');
+           // $table->dropColumn('hora');
         });
     }
 };
