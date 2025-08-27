@@ -64,13 +64,13 @@ Route::group(['middleware' => 'auth:api'], function () {
         Route::delete('eliminarParticipacion/{id}', [ParticipacionesController::class, 'destroy']);
     });
 
-    // Route::middleware(['auth:api','role:admin,asociado'])->group(function(){
-    //     //rotas para admin y asociado
-    //     Route::get('listarParticipaciones', [ParticipacionesController::class, 'index']);
-    //     Route::get('participacion/{id}', [ParticipacionesController::class, 'show']);
-    //     Route::get('listarActividades', [ActividadController::class, 'index']);
-    //     Route::put('actualizarActividad/{id}', [ActividadController::class, 'update']);
-    //     Route::get('pago/{id}', [PagosController::class, 'show']);
-    //     Route::get('listarPrestamos', [PrestamosController::class, 'index']);
-    // });
+    Route::middleware(['auth:api','role:admin,asociado'])->group(function(){
+        //rotas para admin y asociado
+        Route::get('listarParticipaciones', [ParticipacionesController::class, 'index']);
+        Route::get('participacion/{id}', [ParticipacionesController::class, 'show']);
+        Route::get('listarActividades', [ActividadController::class, 'index']);
+        Route::put('actualizarActividad/{id}', [ActividadController::class, 'update']);
+        Route::get('pago/{id}', [PagosController::class, 'show']);
+        Route::get('listarPrestamos', [PrestamosController::class, 'index']);
+    });
 });

@@ -18,16 +18,14 @@ class RoleMiddleware
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
-
         } catch (\Exception $e) {
-            return response()->json(['error'=>'Token invalido o no valido'],401);
-
+            return response()->json(['error' => 'Token invalido o no valido'], 401);
         }
 
 
-        if($user->role !== $role){
-            return response()->json(['error' => 'Acceso denegado. No tienes el permiso necesario'], 403);
-        }
+        // if($user->role !== $role){
+        //     return response()->json(['error' => 'Acceso denegado. No tienes el permiso necesario'], 403);
+        // }
 
         //Para arrray de roles
         // if(!in_array($user->role, $role)){
@@ -37,6 +35,10 @@ class RoleMiddleware
         // if (! in_array($user->role, $roles, true)) {
         //     return response()->json(['error' => 'Acceso denegado. No tienes el permiso necesario'], 403);
         // }
+
+        if (! in_array($user->role, $role, true)) {
+            return response()->json(['error' => 'Acceso denegado. No tienes el permiso necesario'], 403);
+        }
 
 
         return $next($request);
